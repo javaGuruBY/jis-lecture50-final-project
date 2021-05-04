@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:include="app :: head"/>
+<body>
+<th:block th:include="app :: nav"/>
+<main class="container">
+    <div class="row mb-2 mt-5 mb-5">
+        <th:block th:each="photo : ${photos}">
+            <th:block th:include="elem/card :: card"
+                      th:with="primaryTitle=${photo.albumId},
+                                   secondaryTitle=${photo.url},
+                                   date=${''},
+                                   mainText=${photo.title},
+                                   linkUri=${'/photo/'+photo.Id},
+                                   linkText=${'open ...'},
+                                   imgThumbUri=${photo.thumbnailUrl}
+                                   "/>
+        </th:block>
+    </div>
+</main>
+<h3>links</h3>
+<p th:text="|getNextLink ${pages_links.getNextLink()}|"></p>
+<p th:text="|getPreviousLink ${pages_links.getPreviousLink()}|"></p>
+
+<p th:text="|getNumber ${pages_meta.getNumber()}|"></p>
+<p th:text="|getSize ${pages_meta.getSize()}|"></p>
+<p th:text="|getTotalElements ${pages_meta.getTotalElements()}|"></p>
+<p th:text="|getTotalPages ${pages_meta.getTotalPages()}|"></p>
+
+<th:block th:include="app :: footer"/>
+</body>
+<th:block th:include="app :: scripts"/>
+</html>
